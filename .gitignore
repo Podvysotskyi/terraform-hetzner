@@ -1,1 +1,3 @@
-.env
+s3.env
+.terraform
+.idea

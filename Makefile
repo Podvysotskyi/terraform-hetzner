@@ -1,11 +1,15 @@
+# Makefile
+
+SHELL := /bin/bash
+
 init:
-	terraform init
+	source s3.env && terraform init
 
 plan:
-	terraform plan
+	source s3.env && terraform plan
 
 apply:
-	terraform apply
+	source s3.env && terraform apply
 
 format:
 	terraform fmt
