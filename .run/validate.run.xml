@@ -1,0 +1,25 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="validate" type="TerraformConfigurationType" factoryName="Terraform validate" show_console_on_std_err="false" show_console_on_std_out="false">
+    <option name="allowRunningInParallel" value="false" />
+    <option name="commandType" value="VALIDATE" />
+    <option name="envFilePaths">
+      <list>
+        <option value="$PROJECT_DIR$/.env" />
+      </list>
+    </option>
+    <option name="envs">
+      <map />
+    </option>
+    <option name="globalOptions" value="" />
+    <option name="passGlobalOptions" value="false" />
+    <option name="passParentEnvs" value="true" />
+    <option name="programArguments" value="" />
+    <option name="programParameters" value="validate" />
+    <option name="projectPathOnTarget" />
+    <option name="selectedOptions">
+      <list />
+    </option>
+    <option name="workingDirectory" value="$PROJECT_DIR$" />
+    <method v="2" />
+  </configuration>
+</component>
