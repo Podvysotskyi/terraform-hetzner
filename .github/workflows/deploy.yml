@@ -1,4 +1,4 @@
-name: 'Terraform Deploy'
+name: 'Deploy'
 
 on:
  push:
@@ -9,7 +9,7 @@ env:
   AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
 jobs:
-  deploy:
+  terraform:
     name: 'Terraform - Deploy'
     runs-on: ubuntu-latest
     environment: production
