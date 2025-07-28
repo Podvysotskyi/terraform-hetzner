@@ -10,7 +10,7 @@ env:
 
 jobs:
   terraform:
-    name: 'Terraform - Deploy'
+    name: 'Deploy - Terraform'
     runs-on: ubuntu-latest
     environment: production
 
