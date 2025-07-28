@@ -1,8 +1,6 @@
 name: 'Terraform'
 
 on:
- push:
-   branches: [main]
  pull_request:
    branches: [main]
 
@@ -13,7 +11,7 @@ env:
 
 jobs:
   check:
-    name: 'Check Format'
+    name: 'Terraform - Check Format'
     runs-on: ubuntu-latest
 
     defaults:
@@ -34,11 +32,9 @@ jobs:
       run: terraform fmt -check
 
   validate:
-    name: 'Validate'
+    name: 'Terraform - Validate'
     runs-on: ubuntu-latest
     environment: production
-
-    needs: [check]
 
     defaults:
       run:
@@ -62,8 +58,7 @@ jobs:
         run: terraform validate
 
   plan:
-    name: 'Plan'
-    if: github.event_name == 'pull_request'
+    name: 'Terraform - Plan'
     runs-on: ubuntu-latest
     environment: production
 
@@ -86,42 +81,6 @@ jobs:
       id: init
       run: terraform init
 
-    - name: Terraform validate
-      id: validate
-      run: terraform validate
-
     - name: Terraform plan
       id: plan
       run: terraform plan -no-color -input=false
-
-  apply:
-    name: 'Apply'
-    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-    runs-on: ubuntu-latest
-    environment: production
-
-    needs: [check, validate]
-
-    defaults:
-      run:
-        shell: bash
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Setup Terraform with specified version on the runner
-        uses: hashicorp/setup-terraform@v2
-        with:
-          terraform_version: 1.3.0
-
-      - name: Terraform init
-        id: init
-        run: terraform init
-
-      - name: Terraform plan
-        id: plan
-        run: terraform plan -no-color -input=false
-
-      - name: Terraform Apply
-        run: terraform apply -auto-approve -input=false
