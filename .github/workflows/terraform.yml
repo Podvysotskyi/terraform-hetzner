@@ -11,7 +11,7 @@ env:
 
 jobs:
   check:
-    name: 'Terraform - Check Format'
+    name: 'Check Format'
     runs-on: ubuntu-latest
 
     defaults:
@@ -32,7 +32,7 @@ jobs:
       run: terraform fmt -check
 
   validate:
-    name: 'Terraform - Validate'
+    name: 'Validate'
     runs-on: ubuntu-latest
     environment: production
 
@@ -58,7 +58,7 @@ jobs:
         run: terraform validate
 
   plan:
-    name: 'Terraform - Plan'
+    name: 'Plan'
     runs-on: ubuntu-latest
     environment: production
 
