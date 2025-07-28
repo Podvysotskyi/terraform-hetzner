@@ -1,5 +1,4 @@
 # Makefile
-
 SHELL := /bin/bash
 
 init:
