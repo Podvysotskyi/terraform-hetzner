@@ -34,7 +34,7 @@ jobs:
       run: terraform fmt -check
 
   terraform:
-    name: 'Apply'
+    name: 'Plan'
     runs-on: ubuntu-latest
     environment: production
 
