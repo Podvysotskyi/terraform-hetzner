@@ -8,7 +8,7 @@ locals {
 locals {
   port        = 8080
   docker_path = "/var/run/docker.sock"
-  hostname    = "${local.container_name}-${var.server.hostname}"
+  hostname    = "${local.container_name}.${var.server.hostname}"
 }
 
 module "bridge-network" {
