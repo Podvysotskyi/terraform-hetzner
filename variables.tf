@@ -1,12 +1,12 @@
 // Hetzner
 
 variable "HETZNER_IP" {
-  type = string
+  type      = string
   sensitive = true
 }
 
 variable "HETZNER_USER" {
-  type = string
+  type      = string
   sensitive = true
 }
 
