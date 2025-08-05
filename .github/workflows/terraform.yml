@@ -71,6 +71,7 @@ jobs:
       TF_VAR_HETZNER_IP: ${{ secrets.TF_VAR_HETZNER_IP }}
       TF_VAR_HETZNER_USER: ${{ secrets.TF_VAR_HETZNER_USER }}
       TF_VAR_MYSQL_ROOT_PASSWORD: ${{ secrets.TF_VAR_MYSQL_ROOT_PASSWORD }}
+      TF_VAR_POSTGRES_PASSWORD: ${{ secrets.TF_VAR_POSTGRES_PASSWORD }}
 
     defaults:
       run:
