@@ -10,11 +10,6 @@ variable "HETZNER_USER" {
   sensitive = true
 }
 
-variable "HETZNER_PASSWORD" {
-  type      = string
-  sensitive = true
-}
-
 variable "HETZNER_SSH_PORT" {
   type    = number
   default = 22
