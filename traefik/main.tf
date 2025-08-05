@@ -1,7 +1,9 @@
 module "traefik" {
   source = "../modules/deployable/docker/traefik"
 
-  docker = var.docker_host
+  docker = {
+    host = var.docker_host
+  }
 
   server = {
     hostname = var.cloudflare_domain
