@@ -10,3 +10,36 @@ terraform {
     skip_region_validation      = true
   }
 }
+
+module "mysql" {
+  source = "./mysql"
+
+  docker_host         = "ssh://${var.HETZNER_USER}@${var.HETZNER_IP}:${var.HETZNER_SSH_PORT}"
+  mysql_root_password = var.MYSQL_ROOT_PASSWORD
+}
+
+module "traefik" {
+  source = "./traefik"
+
+  docker_host = "ssh://${var.HETZNER_USER}@${var.HETZNER_IP}:${var.HETZNER_SSH_PORT}"
+
+  hetzner_ip = var.HETZNER_IP
+
+  cloudflare_token  = var.CLOUDFLARE_TOKEN
+  cloudflare_email  = var.CLOUDFLARE_EMAIL
+  cloudflare_domain = var.CLOUDFLARE_DOMAIN
+
+  mysql_port = module.mysql.port
+}
+
+module "portainer" {
+  source = "./portainer"
+
+  docker_host = "ssh://${var.HETZNER_USER}@${var.HETZNER_IP}:${var.HETZNER_SSH_PORT}"
+
+  hetzner_ip = var.HETZNER_IP
+
+  cloudflare_token  = var.CLOUDFLARE_TOKEN
+  cloudflare_email  = var.CLOUDFLARE_EMAIL
+  cloudflare_domain = var.CLOUDFLARE_DOMAIN
+}

@@ -64,6 +64,14 @@ jobs:
 
     needs: [check, validate]
 
+    env:
+      TF_VAR_CLOUDFLARE_DOMAIN: ${{ secrets.TF_VAR_CLOUDFLARE_DOMAIN }}
+      TF_VAR_CLOUDFLARE_EMAIL: ${{ secrets.TF_VAR_CLOUDFLARE_EMAIL }}
+      TF_VAR_CLOUDFLARE_TOKEN: ${{ secrets.TF_VAR_CLOUDFLARE_TOKEN }}
+      TF_VAR_HETZNER_IP: ${{ secrets.TF_VAR_HETZNER_IP }}
+      TF_VAR_HETZNER_USER: ${{ secrets.TF_VAR_HETZNER_USER }}
+      TF_VAR_MYSQL_ROOT_PASSWORD: ${{ secrets.TF_VAR_MYSQL_ROOT_PASSWORD }}
+
     defaults:
       run:
         shell: bash
@@ -71,6 +79,10 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v4
+
+    - uses: webfactory/ssh-agent@v0.9.0
+      with:
+        ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
     - name: Setup Terraform with specified version on the runner
       uses: hashicorp/setup-terraform@v2
