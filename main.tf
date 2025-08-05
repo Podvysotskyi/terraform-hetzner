@@ -23,6 +23,8 @@ module "traefik" {
 
   docker_host = "ssh://${var.HETZNER_USER}@${var.HETZNER_IP}:${var.HETZNER_SSH_PORT}"
 
+  hetzner_ip = var.HETZNER_IP
+
   cloudflare_token  = var.CLOUDFLARE_TOKEN
   cloudflare_email  = var.CLOUDFLARE_EMAIL
   cloudflare_domain = var.CLOUDFLARE_DOMAIN
