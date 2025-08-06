@@ -11,35 +11,30 @@ terraform {
   }
 }
 
-module "mysql" {
-  source = "./mysql"
-
-  docker_host         = "ssh://${var.HETZNER_USER}@${var.HETZNER_IP}:${var.HETZNER_SSH_PORT}"
-  mysql_root_password = var.MYSQL_ROOT_PASSWORD
+variable "HETZNER_IP" {
+  type      = string
+  sensitive = true
 }
 
-module "traefik" {
-  source = "./traefik"
-
-  docker_host = "ssh://${var.HETZNER_USER}@${var.HETZNER_IP}:${var.HETZNER_SSH_PORT}"
-
-  hetzner_ip = var.HETZNER_IP
-
-  cloudflare_token  = var.CLOUDFLARE_TOKEN
-  cloudflare_email  = var.CLOUDFLARE_EMAIL
-  cloudflare_domain = var.CLOUDFLARE_DOMAIN
-
-  mysql_port = module.mysql.port
+variable "HETZNER_USER" {
+  type      = string
+  sensitive = true
 }
 
-module "portainer" {
-  source = "./portainer"
+variable "HETZNER_SSH_PORT" {
+  type    = number
+  default = 22
+}
 
-  docker_host = "ssh://${var.HETZNER_USER}@${var.HETZNER_IP}:${var.HETZNER_SSH_PORT}"
+variable "CLOUDFLARE_EMAIL" {
+  type = string
+}
 
-  hetzner_ip = var.HETZNER_IP
+variable "CLOUDFLARE_TOKEN" {
+  type      = string
+  sensitive = true
+}
 
-  cloudflare_token  = var.CLOUDFLARE_TOKEN
-  cloudflare_email  = var.CLOUDFLARE_EMAIL
-  cloudflare_domain = var.CLOUDFLARE_DOMAIN
+variable "CLOUDFLARE_DOMAIN" {
+  type = string
 }
