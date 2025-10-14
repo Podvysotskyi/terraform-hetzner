@@ -25,15 +25,25 @@ variable "traefik" {
 variable "redis" {
   description = "Redis Configuration"
   type        = object({
-    network = optional(string, "redis")
+    network = string
+    host    = string
   })
-  default     = {}
 }
 
 variable "postgres" {
   description = "Postgres Configuration"
   type        = object({
-    network = optional(string, "postgresql")
+    network  = string
+    host     = string
+    database = optional(string, "authentik")
+    password = string
+    user     = optional(string, "authentik")
   })
-  default     = {}
+}
+
+variable "authentik" {
+  description = "Authentik Configuration"
+  type        = object({
+    secret_key = string
+  })
 }

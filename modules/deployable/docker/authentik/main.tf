@@ -34,6 +34,15 @@ module "server" {
       },
     ]
 
+    env = [
+      "AUTHENTIK_POSTGRESQL__HOST=${var.postgres.host}",
+      "AUTHENTIK_POSTGRESQL__NAME=${var.postgres.database}",
+      "AUTHENTIK_POSTGRESQL__PASSWORD=${var.postgres.password}",
+      "AUTHENTIK_POSTGRESQL__USER=${var.postgres.user}",
+      "AUTHENTIK_REDIS__HOST=${var.redis.host}",
+      "AUTHENTIK_SECRET_KEY=${var.authentik.secret_key}",
+    ]
+
     command = ["server"]
   }
 
@@ -65,6 +74,11 @@ module "worker" {
 
     volumes = [
       {
+        source      = local.docker_path
+        destination = "/var/run/docker.sock"
+        read_only   = true
+      },
+      {
         source      = "${var.docker.path}/${local.container_name}/certs"
         destination = "/certs"
       },
@@ -76,6 +90,15 @@ module "worker" {
         source      = "${var.docker.path}/${local.container_name}/templates"
         destination = "/templates"
       },
+    ]
+
+    env = [
+      "AUTHENTIK_POSTGRESQL__HOST=${var.postgres.host}",
+      "AUTHENTIK_POSTGRESQL__NAME=${var.postgres.database}",
+      "AUTHENTIK_POSTGRESQL__PASSWORD=${var.postgres.password}",
+      "AUTHENTIK_POSTGRESQL__USER=${var.postgres.user}",
+      "AUTHENTIK_REDIS__HOST=${var.redis.host}",
+      "AUTHENTIK_SECRET_KEY=${var.authentik.secret_key}",
     ]
 
     command = ["worker"]
