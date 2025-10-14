@@ -9,6 +9,7 @@ variable "docker" {
 variable "traefik" {
   description = "Traefik Configuration"
   type        = object({
+    enable  = optional(bool, false)
     network = optional(string, "traefik")
   })
   default = {}

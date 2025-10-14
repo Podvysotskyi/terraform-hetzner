@@ -16,9 +16,6 @@ module "traefik" {
 
   tcp_ports = [
     {
-      port = module.mysql.port
-    },
-    {
       port = module.postgres.port
     }
   ]

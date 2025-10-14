@@ -16,10 +16,10 @@ module "container" {
     image   = local.image
     version = local.image_version
 
-    networks = [
+    networks = var.traefik.enable == true ? [
       var.traefik.network,
       module.network.name,
-    ]
+    ] : [module.network.name]
 
     volumes = [
       {
@@ -34,7 +34,7 @@ module "container" {
   }
 
   traefik = {
-    enable  = true
+    enable  = var.traefik.enable
     network = var.traefik.network
 
     tcp = {
