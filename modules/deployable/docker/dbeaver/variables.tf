@@ -6,20 +6,24 @@ variable "docker" {
   })
 }
 
+variable "server" {
+  description = "Server Configuration"
+  type        = object({
+    hostname = string
+  })
+}
+
 variable "traefik" {
   description = "Traefik Configuration"
   type        = object({
-    enable  = optional(bool, false)
+    host    = optional(string, null)
     network = optional(string, "traefik")
   })
-  default = {}
+  default     = {}
 }
 
-variable "mysql" {
-  description = "Mysql Configuration"
-  sensitive   = true
-  type        = object({
-    password = optional(string, "password")
-  })
-  default = {}
+variable "networks" {
+  description = "Docker networks"
+  type        = list(string)
+  default     = []
 }

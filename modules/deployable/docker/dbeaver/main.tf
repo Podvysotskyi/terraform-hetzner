@@ -16,28 +16,25 @@ module "container" {
     image   = local.image
     version = local.image_version
 
-    networks = var.traefik.enable == true ? [
-      var.traefik.network,
+    networks = concat([
       module.network.name,
-    ] : [module.network.name]
+      var.traefik.network,
+    ], var.networks)
 
     volumes = [
       {
-        source      = "${var.docker.path}/${local.container_name}/data"
-        destination = "/var/lib/mysql"
+        source      = "${var.docker.path}/${local.container_name}/workspace"
+        destination = "/opt/cloudbeaver/workspace"
       },
-    ]
-
-    env = [
-      "MYSQL_ROOT_PASSWORD=${var.mysql.password}",
     ]
   }
 
   traefik = {
-    enable  = var.traefik.enable
+    enable  = true
     network = var.traefik.network
 
-    tcp = {
+    http = {
+      host = local.host
       port = local.port
     }
   }
