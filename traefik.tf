@@ -13,6 +13,15 @@ module "traefik" {
     email = var.CLOUDFLARE_EMAIL
     token = var.CLOUDFLARE_TOKEN
   }
+
+  tcp_ports = [
+    {
+      port = module.mysql.port
+    },
+    {
+      port = module.postgres.port
+    }
+  ]
 }
 
 module "traefik_cloudflare_record" {
