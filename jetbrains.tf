@@ -25,6 +25,6 @@ module "jetbrains_hub_cloudflare_record" {
 
   record = {
     ip   = var.HETZNER_IP
-    name = module.dbeaver.host
+    name = module.jetbrains_hub.host
   }
 }
