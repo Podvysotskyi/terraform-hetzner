@@ -13,3 +13,9 @@ variable "traefik" {
     network = optional(string, "traefik")
   })
 }
+
+variable "networks" {
+  description = "Docker networks"
+  type        = list(string)
+  default     = []
+}
