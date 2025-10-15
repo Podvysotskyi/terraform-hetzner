@@ -35,6 +35,13 @@ module "container" {
 
     env = [
       "SECRET_ENCRYPTION_KEY=${var.homarr.secret_key}",
+      "AUTH_PROVIDERS=oidc,credentials",
+      "AUTH_OIDC_CLIENT_ID=${var.authentik.client_id}",
+      "AUTH_OIDC_CLIENT_SECRET=${var.authentik.client_secret}",
+      "AUTH_OIDC_ISSUER=https://${var.authentik.host}/application/o/${var.authentik.slug}/",
+      "AUTH_OIDC_URI=https://${var.authentik.host}/application/o/authorize",
+      "AUTH_OIDC_CLIENT_NAME=authentik",
+      "OAUTH_ALLOW_DANGEROUS_EMAIL_ACCOUNT_LINKING=true",
     ]
   }
 

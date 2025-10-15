@@ -3,6 +3,16 @@ variable "HOMARR_SECRET_KEY" {
   sensitive = true
 }
 
+variable "HOMARR_AUTH_OIDC_CLIENT_ID" {
+  type      = string
+  sensitive = true
+}
+
+variable "HOMARR_AUTH_OIDC_CLIENT_SECRET" {
+  type      = string
+  sensitive = true
+}
+
 module "homarr" {
   source = "./modules/deployable/docker/homarr"
 
@@ -20,6 +30,12 @@ module "homarr" {
 
   homarr = {
     secret_key = var.HOMARR_SECRET_KEY
+  }
+
+  authentik = {
+    host          = module.authentik.host
+    client_id     = var.HOMARR_AUTH_OIDC_CLIENT_ID
+    client_secret = var.HOMARR_AUTH_OIDC_CLIENT_SECRET
   }
 }
 

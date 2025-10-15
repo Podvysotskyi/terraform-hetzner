@@ -29,3 +29,13 @@ variable "homarr" {
     secret_key = string
   })
 }
+
+variable "authentik" {
+  description = "Authentik Configuration"
+  type        = object({
+    host          = string
+    client_id     = string
+    client_secret = string
+    slug          = optional(string, "api-auth-callback-oidc")
+  })
+}
