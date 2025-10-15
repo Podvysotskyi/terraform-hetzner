@@ -3,5 +3,5 @@ output "network" {
 }
 
 output "host" {
-  value = local.hostname
+  value = local.host
 }

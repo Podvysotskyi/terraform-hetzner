@@ -1,16 +1,3 @@
-locals {
-  image          = "traefik"
-  image_version  = "v3.3"
-  container_name = "traefik"
-  network_name   = "traefik"
-}
-
-locals {
-  port        = 8080
-  docker_path = "/var/run/docker.sock"
-  hostname    = "${local.container_name}.${var.server.hostname}"
-}
-
 module "bridge-network" {
   source = "../../../imports/docker/network"
   docker = var.docker
@@ -120,7 +107,7 @@ module "container" {
 
     http = {
       port = local.port
-      host = local.hostname
+      host = local.host
     }
   }
 }
