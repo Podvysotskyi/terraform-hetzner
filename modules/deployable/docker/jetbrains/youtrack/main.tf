@@ -17,26 +17,26 @@ module "container" {
     version = local.image_version
 
     networks = [
-      module.network.name,
       var.traefik.network,
+      module.network.name
     ]
 
     volumes = [
       {
-        source      = "${var.docker.path}/jetbrains/hub/data"
-        destination = "/opt/hub/data"
+        source      = "${var.docker.path}/jetbrains/youtrack/data"
+        destination = "/opt/youtrack/data"
       },
       {
-        source      = "${var.docker.path}/jetbrains/hub/conf"
-        destination = "/opt/hub/conf"
+        source      = "${var.docker.path}/jetbrains/youtrack/conf"
+        destination = "/opt/youtrack/conf"
       },
       {
-        source      = "${var.docker.path}/jetbrains/hub/logs"
-        destination = "/opt/hub/logs"
+        source      = "${var.docker.path}/jetbrains/youtrack/logs"
+        destination = "/opt/youtrack/logs"
       },
       {
-        source      = "${var.docker.path}/jetbrains/hub/backups"
-        destination = "/opt/hub/backups"
+        source      = "${var.docker.path}/jetbrains/youtrack/backups"
+        destination = "/opt/youtrack/backups"
       },
     ]
   }

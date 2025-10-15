@@ -1,12 +1,12 @@
-module "jetbrains_hub" {
-  source = "./modules/deployable/docker/jetbrains/hub"
+module "jetbrains_youtrack" {
+  source = "./modules/deployable/docker/jetbrains/youtrack"
 
   docker = {
     host = "ssh://${var.HETZNER_USER}@${var.HETZNER_IP}:${var.HETZNER_SSH_PORT}"
   }
 
   traefik = {
-    host = "hub.jetbrains.${var.CLOUDFLARE_DOMAIN}"
+    host = "youtrack.jetbrains.${var.CLOUDFLARE_DOMAIN}"
   }
 }
 
@@ -22,24 +22,9 @@ module "jetbrains_teamcity_server" {
   }
 
   networks = [
-    module.jetbrains_hub.network,
+    module.jetbrains_youtrack.network,
     module.postgres.network
   ]
-}
-
-module "jetbrains_hub_cloudflare_record" {
-  source = "./modules/common/cloudflare/dns-record"
-
-  cloudflare = {
-    email  = var.CLOUDFLARE_EMAIL
-    token  = var.CLOUDFLARE_TOKEN
-    domain = var.CLOUDFLARE_DOMAIN
-  }
-
-  record = {
-    ip   = var.HETZNER_IP
-    name = module.jetbrains_hub.host
-  }
 }
 
 module "jetbrains_teamcity_server_cloudflare_record" {
@@ -54,5 +39,20 @@ module "jetbrains_teamcity_server_cloudflare_record" {
   record = {
     ip   = var.HETZNER_IP
     name = module.jetbrains_teamcity_server.host
+  }
+}
+
+module "jetbrains_youtrack_cloudflare_record" {
+  source = "./modules/common/cloudflare/dns-record"
+
+  cloudflare = {
+    email  = var.CLOUDFLARE_EMAIL
+    token  = var.CLOUDFLARE_TOKEN
+    domain = var.CLOUDFLARE_DOMAIN
+  }
+
+  record = {
+    ip   = var.HETZNER_IP
+    name = module.jetbrains_youtrack.host
   }
 }
