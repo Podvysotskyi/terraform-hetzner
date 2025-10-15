@@ -28,9 +28,13 @@ module "container" {
         read_only   = true
       },
       {
-        source      = "${var.docker.path}/${local.container_name}/data"
-        destination = "/data"
+        source      = "${var.docker.path}/${local.container_name}/appdata"
+        destination = "/appdata"
       },
+    ]
+
+    env = [
+      "SECRET_ENCRYPTION_KEY=${var.homarr.secret_key}",
     ]
   }
 
