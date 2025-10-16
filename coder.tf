@@ -2,6 +2,14 @@ variable "CODER_POSTGRES_PASSWORD" {
   type = string
 }
 
+variable "CODER_AUTH_OIDC_CLIENT_ID" {
+  type = string
+}
+
+variable "CODER_AUTH_OIDC_CLIENT_SECRET" {
+  type = string
+}
+
 module "coder" {
   source = "./modules/deployable/docker/coder"
 
@@ -32,5 +40,11 @@ module "coder_cloudflare_record" {
   record = {
     ip   = var.HETZNER_IP
     name = module.coder.host
+  }
+
+  authentik = {
+    host          = module.authentik.host
+    client_id     = var.CODER_AUTH_OIDC_CLIENT_ID
+    client_secret = var.CODER_AUTH_OIDC_CLIENT_SECRET
   }
 }

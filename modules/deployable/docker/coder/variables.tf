@@ -32,3 +32,12 @@ variable "postgres" {
     database = optional(string, "coder")
   })
 }
+
+variable "authentik" {
+  description = "Authentik Configuration"
+  type        = object({
+    host = string
+    client_id     = string
+    client_secret = string
+  })
+}
