@@ -26,6 +26,12 @@ module "coder" {
     host     = module.postgres.host
     password = var.CODER_POSTGRES_PASSWORD
   }
+
+  authentik = {
+    host          = module.authentik.host
+    client_id     = var.CODER_AUTH_OIDC_CLIENT_ID
+    client_secret = var.CODER_AUTH_OIDC_CLIENT_SECRET
+  }
 }
 
 module "coder_cloudflare_record" {
@@ -40,11 +46,5 @@ module "coder_cloudflare_record" {
   record = {
     ip   = var.HETZNER_IP
     name = module.coder.host
-  }
-
-  authentik = {
-    host          = module.authentik.host
-    client_id     = var.CODER_AUTH_OIDC_CLIENT_ID
-    client_secret = var.CODER_AUTH_OIDC_CLIENT_SECRET
   }
 }
