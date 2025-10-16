@@ -110,7 +110,7 @@ resource "docker_container" "container" {
   memory            = 0
   memory_swap       = 0
   network_mode      = "bridge"
-  privileged        = false
+  privileged        = var.container.privileged
   publish_all_ports = false
 
   dynamic "ports" {

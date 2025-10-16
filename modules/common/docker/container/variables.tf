@@ -12,6 +12,8 @@ variable "container" {
     image   = string
     version = optional(string, "latest")
 
+    privileged = optional(bool, false)
+
     networks = optional(list(string), [])
 
     command = optional(list(string), [])
