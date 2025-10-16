@@ -27,6 +27,19 @@ module "jetbrains_teamcity_server" {
   ]
 }
 
+module "jetbrains_teamcity_agent" {
+  source = "./modules/deployable/docker/jetbrains/teamcity-agent"
+
+  docker = {
+    host = "ssh://${var.HETZNER_USER}@${var.HETZNER_IP}:${var.HETZNER_SSH_PORT}"
+  }
+
+  teamcity = {
+    host    = module.jetbrains_teamcity_server.host
+    network = module.jetbrains_youtrack.network
+  }
+}
+
 module "jetbrains_teamcity_server_cloudflare_record" {
   source = "./modules/common/cloudflare/dns-record"
 
