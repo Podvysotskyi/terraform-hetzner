@@ -41,7 +41,7 @@ module "container" {
       "CODER_HTTP_ADDRESS=0.0.0.0:7080",
       "CODER_ACCESS_URL=https://${local.host}",
       "CODER_OIDC_ISSUER_URL=https://${var.authentik.host}/application/o/${local.container_name}/",
-      "CODER_OIDC_EMAIL_DOMAIN=acme.company,acme-corp.company",
+      "CODER_OIDC_EMAIL_DOMAIN=${var.authentik.domain}",
       "CODER_OIDC_CLIENT_ID=${var.authentik.client_id}",
       "CODER_OIDC_CLIENT_SECRET=${var.authentik.client_secret}",
       "CODER_OIDC_SIGN_IN_TEXT=Log in with authentik",
