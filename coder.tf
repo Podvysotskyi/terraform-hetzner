@@ -29,6 +29,7 @@ module "coder" {
 
   authentik = {
     host          = module.authentik.host
+    domain        = var.CLOUDFLARE_DOMAIN
     client_id     = var.CODER_AUTH_OIDC_CLIENT_ID
     client_secret = var.CODER_AUTH_OIDC_CLIENT_SECRET
   }

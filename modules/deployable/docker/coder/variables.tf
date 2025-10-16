@@ -36,7 +36,8 @@ variable "postgres" {
 variable "authentik" {
   description = "Authentik Configuration"
   type        = object({
-    host = string
+    host          = string
+    domain        = string
     client_id     = string
     client_secret = string
   })
